@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>You can't Beat it</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="libaries/three1.js"></script>
+    <script src="libaries/helvetiker_regular.typeface.js"></script>
+
+    <script type="text/javascript" src="libaries/physi.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+    <div id="3scene"></div>
+    <script type="text/javascript">
+    var count = 0;
+
+
+    // window.onbeforeunload = function() {window.location("Scene1.html")};
+
+
+        var scene;
+        var objects = [];
+var onep,twop,back;
+       var projector = new THREE.Projector();
+    var mouseVector = new THREE.Vector3();
+        var game = (function() {
+
+
+            'use strict';
+            Physijs.scripts.worker = 'libaries/physijs_worker.js';
+            Physijs.scripts.ammo = '../libaries/ammo.js';
+
+            var input;
+            var initScene, render,
+                ground_material, box_material,
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true
+                }),
+                render_stats, physics_stats, scene = new Physijs.Scene(),
+                ground, light, camera,
+                vehicle_body, vehicle, loader;
+
+
+            initScene = function() {
+
+
+
+
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                //renderer.shadowMapSoft = true;
+                document.getElementById('3scene').appendChild(renderer.domElement);
+
+
+
+
+
+                //===========================================================
+
+                //=============================================================
+
+
+
+
+
+
+                var road = new THREE.Mesh(
+                    new THREE.PlaneGeometry(200, 150, 100, 100),
+                    new THREE.MeshLambertMaterial({
+                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
+                    }),
+                    0
+                );
+                road.rotation.x = -Math.PI / 2;
+                road.receiveShadow = true;
+                road.position.z = 10;
+                road.position.y = -10;
+
+
+                scene.add(road);
+
+
+                function createText(textContent, colors, z, x, y, rotx, size1, height1, roty) {
+                    //set the variable outside and then call each letter by the var in the add event listenener so wehn it hover it can do something
+
+                    var text3d = new THREE.TextGeometry(textContent, {
+                        size: size1,
+                        height: height1,
+                        curveSegments: 2,
+                        font: "helvetiker"
+                    });
+                    var loader = new THREE.TextureLoader();
+
+                    var textMaterial = new THREE.MeshPhongMaterial({
+                        color: colors
+                    });
+                    var textMesh = new THREE.Mesh(text3d, textMaterial);
+
+
+                    textMesh.receiveShadow = true;
+                    textMesh.position.z = z;
+                    textMesh.position.y = y
+                    textMesh.position.x = x;
+                    textMesh.rotation.set(rotx, roty, 0)
+                    textMesh.name = textContent;
+
+                    scene.add(textMesh);
+                    var light1 = new THREE.DirectionalLight(0xffffff);
+                    light1.position.set(20, 20, 15);
+
+                    textMesh.add(light1);
+
+                }
+                createText("Game", 0x64210d, -37, -56, -6, -1.5, 15, 20, 0);
+                createText("Mode", 0x142268, -37, 5, -6, -1.5, 15, 20, 0);
+
+
+
+
+
+
+                var twopGeo = new THREE.TextGeometry("1P vs 2P", {
+                    size: 15,
+                    height: 20,
+                    curveSegments: 2,
+                    font: "helvetiker"
+                });
+                var twopLoa = new THREE.TextureLoader();
+
+                var twopMate = new THREE.MeshPhongMaterial({
+                    color: 0x142268
+                });
+                 twop = new THREE.Mesh(twopGeo, twopMate);
+
+
+                twop.receiveShadow = true;
+                twop.position.z = 27;
+                twop.position.y = -6
+                twop.position.x = -43;
+                twop.rotation.set(-1.7, 0, 0)
+                twop.name = "1P vs 2P";
+
+                scene.add(twop);
+                var light1 = new THREE.DirectionalLight(0x0000ff);
+                light1.position.set(20, 20, 15);
+
+                twop.add(light1);
+
+
+                //===================================================
+                var onepGeo = new THREE.TextGeometry("1P vs CP", {
+                    size: 15,
+                    height: 20,
+                    curveSegments: 2,
+                    font: "helvetiker"
+                });
+                var oneLoa = new THREE.TextureLoader();
+
+                var onepMate = new THREE.MeshPhongMaterial({
+                    color: 0x64210d
+                });
+                onep = new THREE.Mesh(onepGeo, onepMate);
+
+
+                onep.receiveShadow = true;
+                onep.position.z = -7;
+                onep.position.y = -6;
+                onep.position.x = -43;
+                onep.rotation.set(-1.6, 0, 0)
+                onep.name = "1P vs CP";
+
+                scene.add(onep);
+                var light1 = new THREE.DirectionalLight(0xff0000);
+                light1.lookAt(onep.position);
+
+                onep.add(light1);
+
+
+                var oneplane = new THREE.Mesh(
+                    new THREE.PlaneGeometry(80, 30, 100, 100),
+                    new THREE.MeshLambertMaterial({
+                        color: 0xffffff,
+                        transparent: true,
+                        opacity: 0.9
+                    }),
+                    0
+                );
+
+                //================================================================
+
+
+                var backGeo = new THREE.TextGeometry("Back", {
+                    size: 5,
+                    height: 5,
+                    curveSegments: 2,
+                    font: "helvetiker"
+                });
+                var backLoa = new THREE.TextureLoader();
+
+                var backMate = new THREE.MeshPhongMaterial({
+                    color: 0x64210d
+                });
+                back = new THREE.Mesh(backGeo, backMate);
+
+
+                back.receiveShadow = true;
+                back.position.z = 60;
+                back.position.y = -6
+                back.position.x = -73;
+                back.rotation.set(-1.85, 0.3, 0)
+                back.name = "Back";
+
+                scene.add(back);
+                var light1 = new THREE.DirectionalLight(0xffffff);
+                light1.position.set(20, 20, 15);
+
+                back.add(light1);
+                var backplane = new THREE.Mesh(
+                    new THREE.PlaneGeometry(20, 7, 100, 100),
+                    new THREE.MeshLambertMaterial({
+                        color: 0xffffff,
+                        transparent: true,
+                        opacity: 0.9
+                    }),
+                    0
+                );
+
+
+    
+
+                //============================================================
+
+                
+
+
+
+
+
+
+                camera = new THREE.PerspectiveCamera(
+                    35,
+                    window.innerWidth / window.innerHeight,
+                    1,
+                    1000
+                );
+                scene.add(camera);
+
+                light = new THREE.DirectionalLight(0xffffff);
+                light.position.set(20, 20, -15);
+
+                scene.add(light);
+
+                console.log(scene.children)
+
+                requestAnimationFrame(render);
+                scene.simulate();
+            };
+
+            render = function() {
+                camera.position.copy(light.position).add(new THREE.Vector3(-20, 210, 0));
+                camera.rotation.set(-1.65, 0, 0)
+                requestAnimationFrame(render);
+                renderer.render(scene, camera);
+            };
+
+            function gamemode( e ) {
+               console.log(e.keyCode)
+                switch (e.keyCode) {
+                        case 66: // left
+                            window.location.href = "Scene1.html";
+                            count = 0
+                            break;
+
+                        case 38:
+                        if ((onep.position.y=== -6)) {
+                             onep.position.y =50;
+                        twop.position.y =-6;                             
+                         }else if ((onep.position.y === 50)) {
+                            onep.position.y = -6;
+                            twop.position.y =50;
+                         };                       
+                            break;
+                        case 40: 
+                        if ((twop.position.y=== -6)) {
+                            onep.position.y = -6;
+                            twop.position.y =50;
+                             
+                         }else if ((twop.position.y === 50)) {
+                            onep.position.y =50;
+                             twop.position.y =-6;
+                         };
+                            break;
+                            case 13:
+
+                            if ((twop.position.y === 50)&&(onep.position.y=== -6)) {
+                                console.log("2 player works")
+                            window.location.href = "Scene3-2p.html";
+                         }else if ((twop.position.y === -6)&&(onep.position.y=== 50)) {
+                            console.log("1 player works")
+                            window.location.href = "Scene3-1p.html";
+                            // window.location.href = "Scene3-2p.html";
+                         };
+
+
+                            break;
+                    }
+
+        
+
+            
+      
+    }
+
+
+
+            window.onload = initScene;
+window.addEventListener( 'keydown', gamemode, false );
+            return {
+                scene: scene,
+                camera: camera,
+                initScene: initScene
+            };
+        })();
+    </script>
+
+
+</body>
+
+</html>

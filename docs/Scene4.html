@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>You can't Beat it</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="libaries/three1.js"></script>
+    <script src="libaries/helvetiker_regular.typeface.js"></script>
+
+    <script type="text/javascript" src="libaries/physi.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+    <div id="3scene"></div>
+    <script type="text/javascript">
+
+    
+        var scene,road;
+        var game = (function() {
+
+
+            'use strict';
+            Physijs.scripts.worker = 'libaries/physijs_worker.js';
+            Physijs.scripts.ammo = '../libaries/ammo.js';
+
+            var input;
+            var initScene, render,
+                ground_material, box_material,
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true
+                }),
+                render_stats, physics_stats, scene = new Physijs.Scene(),
+                ground, light, camera,
+                vehicle_body, vehicle, loader;
+
+
+document.addEventListener('keydown',function(ev) {
+
+                   if (ev.keyCode === 66){
+                    window.location.href = "Scene3-1p.html";
+                    }else{
+
+                         return;   
+
+                    };
+
+                
+
+                })
+            initScene = function() {
+
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                //renderer.shadowMapSoft = true;
+                document.getElementById('3scene').appendChild(renderer.domElement);
+
+
+
+
+
+
+
+
+
+                road = new THREE.Mesh(
+                    new THREE.PlaneGeometry(200, 150, 100, 100),
+                    new THREE.MeshLambertMaterial({
+                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
+                    }), //http://opengameart.org/sites/default/files/oga-textures/tunnel_road.jpg
+                    0
+                );
+                road.rotation.x = -Math.PI / 2;
+                road.receiveShadow = true;
+                road.position.z = 10;
+                road.position.y = -10;
+
+                scene.add(road);
+
+
+                function createText(textContent, colors, z, x, y, rotx) {
+                    //set the variable outside and then call each letter by the var in the add event listenener so wehn it hover it can do something
+                    var text3d = new THREE.TextGeometry(textContent, {
+                        size: 15,
+                        height: 20,
+                        curveSegments: 2,
+                        font: "helvetiker"
+                    });
+                    var loader = new THREE.TextureLoader();
+
+                    var textMaterial = new THREE.MeshPhongMaterial({
+                        color: colors
+                    });
+                    var textMesh = new THREE.Mesh(text3d, textMaterial);
+
+
+                    textMesh.receiveShadow = true;
+                    textMesh.position.z = z;
+                    textMesh.position.y = y
+                    textMesh.position.x = x;
+                    textMesh.rotation.set(rotx, 0, 0)
+                    scene.add(textMesh);
+                    var light1 = new THREE.DirectionalLight(0xffffff);
+                    light1.position.set(20, 20, 15);
+
+                    textMesh.add(light1);
+                }
+                createText("Select", 0x64210d, -37, -56, -6, -1.5);
+                createText("Map", 0x142268, -37, 10, -6, -1.5);
+
+
+
+
+
+
+
+
+
+                camera = new THREE.PerspectiveCamera(
+                    35,
+                    window.innerWidth / window.innerHeight,
+                    1,
+                    1000
+                );
+                scene.add(camera);
+
+                light = new THREE.DirectionalLight(0xffffff);
+                light.position.set(20, 20, -15);
+
+                scene.add(light);
+
+
+
+
+
+                var material = new THREE.MeshLambertMaterial({
+                    map: THREE.ImageUtils.loadTexture('Media/map_2.png')
+                });
+                var ground1 = new THREE.Mesh(
+                    new THREE.PlaneGeometry(40, 40),
+                    material,
+                    0
+                );
+
+                ground1.rotation.x = -Math.PI / 2;
+                ground1.rotation.y = 0.1;
+
+                ground1.receiveShadow = true;
+                ground1.position.z = 7;
+                ground1.position.y = -6
+                ground1.position.x = -33;
+
+                scene.add(ground1)
+
+var light1 = new THREE.DirectionalLight(0x000fff);
+                light1.position.set(20, 20, -15);
+                 scene.add(light1);
+
+                //=================================================
+
+                var material3 = new THREE.MeshLambertMaterial({
+                    map: THREE.ImageUtils.loadTexture('Media/map_1.png')
+                });
+                var ground3 = new THREE.Mesh(
+                    new THREE.PlaneGeometry(40, 40),
+                    material3,
+                    0
+                );
+
+                ground3.rotation.x = -Math.PI / 2;
+                ground3.rotation.y = 0;
+
+
+                ground3.receiveShadow = true;
+                ground3.position.z = 7;
+                ground3.position.y = -6
+                ground3.position.x = 33;
+
+                scene.add(ground3)
+var light2 = new THREE.DirectionalLight(0xfff000);
+                light2.position.set(20, 20, -15);
+                 scene.add(light2);
+
+                requestAnimationFrame(render);
+                scene.simulate();
+            
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('keydown',selectPlayer);
+
+
+function selectPlayer (e) {
+console.log(e.keyCode)
+
+
+switch (e.keyCode) {
+                        case 37: // left
+                    
+                        if ((ground1.position.y === -6)&&(ground3.position.y === -6)) {
+                            ground3.position.y = 40;
+                            ground1.position.y = -6;
+                            
+                        }else if ((ground1.position.y === -6)&&(ground3.position.y === 40)) {
+                            ground3.position.y = -6;
+                            ground1.position.y = 40;
+                            
+                        }else if ((ground1.position.y === 40)&&(ground3.position.y === -6)) {
+                            ground3.position.y = 40;
+                            ground1.position.y = -6;
+                        }
+
+                        break;
+                        case 39://right
+                        if ((ground1.position.y === -6)&&(ground3.position.y === -6)) {
+                            ground3.position.y = -6;
+                            ground1.position.y = 40;
+                            
+                        }else if ((ground3.position.y === -6)&&(ground1.position.y === 40)) {
+                            ground3.position.y = 40;
+                            ground1.position.y = -6;
+                            
+                        }else if ((ground3.position.y === 40)&&(ground1.position.y === -6)) {
+                            ground3.position.y = -6;
+                            ground1.position.y = 40;
+                        }
+                        break;
+                        case 13://down
+
+                        if (ground1.position.y === 40) {
+                        alert("out of order")
+
+                        }else if (ground3.position.y === 40) {
+                            
+                            window.location.href = "index.html"
+                        };
+                        break;
+                    
+                        
+                    }
+
+
+
+            }
+
+            };
+
+            render = function() {
+
+                requestAnimationFrame(render);
+
+
+
+                 camera.position.copy(road.position).add(new THREE.Vector3(0, 250, 0));
+
+                    // camera.lookAt(ground1.position);
+
+                    camera.rotation.set(-1.58, 0, 0)
+
+                renderer.render(scene, camera);
+
+            };
+
+
+            return {
+                scene: scene,
+                camera: camera,
+                initScene: initScene
+            };
+        })();
+
+        window.onload = game.initScene;
+    </script>
+
+
+</body>
+
+</html>

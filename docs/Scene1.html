@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>You can't Beat it</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="libaries/three.min.js"></script>
+
+    <script type="text/javascript" src="libaries/physi.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <div id="starthere"></div>
+    <h1 class="Scene1">Press any Key to Continue</h1>
+    <script type="text/javascript">
+        var scene;
+        var game = (function() {
+
+
+            'use strict';
+            /*Loading two libaries ammo.js and physijs_worker.js*/
+            Physijs.scripts.worker = 'libaries/physijs_worker.js';
+            Physijs.scripts.ammo = '../libaries/ammo.js';
+
+
+
+
+
+
+
+
+
+            var input;
+            var initScene, render,
+                ground_material, box_material,
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true
+                }),
+                render_stats, physics_stats, scene = new Physijs.Scene(),
+                ground, light,light1, camera,
+                vehicle_body, vehicle, loader;
+
+            document.addEventListener('keydown', function() {
+                console.log("ivan")
+                window.location.href = "Scene2.html";
+            })
+            initScene = function() {
+
+
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                //renderer.shadowMapSoft = true;
+                document.getElementById('starthere').appendChild(renderer.domElement);
+                loader = new THREE.TextureLoader();
+
+                // Materials
+                ground_material = Physijs.createMaterial(
+                    new THREE.MeshLambertMaterial({
+                        map: loader.load('Media/0.jpg')
+                    }),
+                    .8, // high friction
+                    .4 // low restitution
+                );
+
+
+                var ground_geometry = new THREE.PlaneGeometry(100, 100, 100, 100);
+                for (var i = 0; i < ground_geometry.vertices.length; i++) {
+                    var vertex = ground_geometry.vertices[i];
+                }
+
+                ground = new Physijs.HeightfieldMesh(
+                    ground_geometry,
+                    ground_material,
+                    0 // mass
+                );
+                ground.rotation.x = -Math.PI / 2;
+                ground.receiveShadow = true;
+                scene.add(ground);
+
+                var ground_material2 = new THREE.MeshBasicMaterial({
+                    color: 0xffffff
+                });
+                var ground_geometry2 = new THREE.PlaneGeometry(150, 150);
+                var ground2 = new Physijs.HeightfieldMesh(
+                    ground_geometry2,
+                    ground_material2,
+                    0 // mass
+                );
+                ground2.position.set(0, 0, 45)
+                scene.add(ground2)
+                console.log(ground2.position)
+                scene.setGravity(new THREE.Vector3(0, 0, 20));
+                scene.addEventListener(
+                    'update',
+                    function() {
+
+                        if (input && vehicle) {
+                            if (input.direction !== null) {
+                                input.steering += input.direction / 50;
+                                if (input.steering < -0.6) input.steering = -0.6;
+                                if (input.steering > 0.6) input.steering = 0.6;
+                            }
+                            vehicle.setSteering(input.steering, 0);
+                            vehicle.setSteering(input.steering, 1);
+
+                            if (input.power === true) {
+                                vehicle.applyEngineForce(200);
+
+                            } else if (input.power === false) {
+                                count++;
+                                if (count < 10) {
+                                    vehicle.setBrake(20, 2);
+                                    vehicle.setBrake(20, 3);
+                                } else {
+                                    vehicle.applyEngineForce(-150);
+
+                                }
+                            } else {
+                                vehicle.applyEngineForce(0);
+                            }
+                        }
+
+                        scene.simulate(undefined, 2);
+                    }
+                );
+
+                camera = new THREE.PerspectiveCamera(
+                    35,
+                    window.innerWidth / window.innerHeight,
+                    1,
+                    1000
+                );
+                scene.add(camera);
+
+                light = new THREE.DirectionalLight(0xFFFFFF);
+                light.position.set(20, 20, -15);
+               
+                scene.add(light);
+
+light1 = new THREE.DirectionalLight(0xFFFFFF);
+                light1.position.set(20, 20, -15);
+               
+                ground.add(light1);
+
+
+                var json_loader = new THREE.JSONLoader();
+                json_loader.load("js/models/mustang.js", function(car, car_materials) {
+                    json_loader.load("js/models/mustang_wheel.js", function(wheel, wheel_materials) {
+                        var mesh = new Physijs.BoxMesh(
+                            car,
+                            new THREE.MeshFaceMaterial(car_materials)
+                        );
+                        mesh.position.set(0, 30, 35)
+                        mesh.rotation.set(-1.6, 1.2, 0)
+                        mesh.scale.set(7, 7, 7)
+
+                        vehicle = new Physijs.Vehicle(mesh, new Physijs.VehicleTuning(
+                            100.88,
+                            10.83,
+                            10.88,
+                            5000,
+                            100.5,
+                            100000
+                        ));
+
+                        scene.add(vehicle);
+                        var wheel_material = new THREE.MeshFaceMaterial(wheel_materials);
+
+                        for (var i = 0; i < 4; i++) {
+                            vehicle.addWheel(
+                                wheel,
+                                wheel_material,
+                                new THREE.Vector3(
+                                    i % 2 === 0 ? -14.6 : 14.6, -1,
+                                    i < 2 ? 24.3 : -22.2
+                                ),
+                                new THREE.Vector3(0, -7, 0),
+                                new THREE.Vector3(-7, -3, 0),
+                                1,
+                                0.7,
+                                i < 2 ? false : true
+                            );
+                        }
+
+
+                    });
+                });
+
+
+                requestAnimationFrame(render);
+                scene.simulate();
+            };
+
+            render = function() {
+
+                requestAnimationFrame(render);
+                if (vehicle) {
+
+
+                    camera.position.copy(vehicle.mesh.position).add(new THREE.Vector3(0, 170, -60));
+
+                    // camera.lookAt(vehicle.mesh.position);
+
+                    camera.rotation.set(-1.7, 0, 0)
+                }
+                renderer.render(scene, camera);
+
+            };
+
+
+            return {
+                scene: scene,
+                camera: camera,
+                initScene: initScene
+            };
+        })();
+
+        window.onload = game.initScene;
+    </script>
+
+
+</body>
+
+</html>

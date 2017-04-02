@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>You can't Beat it</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="MarioKart/css/styles.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="libaries/three.min.js"></script>
+    <script type="text/javascript" src="MarioKart/libaries/three.min.js"></script>
 
-    <script type="text/javascript" src="libaries/physi.js"></script>
+    <script type="text/javascript" src="MarioKart/libaries/physi.js"></script>
 
 
 
@@ -25,7 +25,7 @@
 
             'use strict';
             /*Loading two libaries ammo.js and physijs_worker.js*/
-            Physijs.scripts.worker = 'libaries/physijs_worker.js';
+            Physijs.scripts.worker = 'MarioKart/libaries/physijs_worker.js';
             Physijs.scripts.ammo = '../libaries/ammo.js';
 
 
@@ -48,7 +48,7 @@
 
             document.addEventListener('keydown', function() {
                 console.log("ivan")
-                window.location.href = "Scene2.html";
+                window.location.href = "MarioKart/Scene2.html";
             })
             initScene = function() {
 
@@ -62,7 +62,7 @@
                 // Materials
                 ground_material = Physijs.createMaterial(
                     new THREE.MeshLambertMaterial({
-                        map: loader.load('Media/0.jpg')
+                        map: loader.load('MarioKart/Media/0.jpg')
                     }),
                     .8, // high friction
                     .4 // low restitution
@@ -150,8 +150,8 @@ light1 = new THREE.DirectionalLight(0xFFFFFF);
 
 
                 var json_loader = new THREE.JSONLoader();
-                json_loader.load("js/models/mustang.js", function(car, car_materials) {
-                    json_loader.load("js/models/mustang_wheel.js", function(wheel, wheel_materials) {
+                json_loader.load("MarioKart/js/models/mustang.js", function(car, car_materials) {
+                    json_loader.load("MarioKart/js/models/mustang_wheel.js", function(wheel, wheel_materials) {
                         var mesh = new Physijs.BoxMesh(
                             car,
                             new THREE.MeshFaceMaterial(car_materials)

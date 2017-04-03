@@ -70,7 +70,7 @@ var map_1 = (function() {
         // Materials
         ground_material = Physijs.createMaterial(
             new THREE.MeshLambertMaterial({
-                map: loader.load('media/map_1.png')
+                map: loader.load('Media/map_1.png')
             }),
             friction, // high friction
             0.4 // low restitution

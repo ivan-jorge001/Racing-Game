@@ -96,7 +96,7 @@ camera = new THREE.PerspectiveCamera(
                     vehicle.setSteering(input.steering, 1);
 
                     if (input.power === true) {
-                        vehicle.applyEngineForce(400);
+                        vehicle.applyEngineForce(200);
 
                     } else if (input.power === false) {
                         count++;

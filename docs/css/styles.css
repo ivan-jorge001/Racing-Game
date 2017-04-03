@@ -32,21 +32,20 @@ body {
 #viewport{
     height: auto;
     width: auto;
-    
-    overflow: hidden;
+    border: 1px solid blue;
 }
 #viewport1{
     position: absolute;
     height:inherit;
     width: 50%;
-    b
+    border: 1px solid pink;
     right: 0px;
 }
 #viewport2{
     position: absolute;
     height: inherit;
     width: 50%;
-    
+    border: 1px solid black;
     float: right;
 }
 

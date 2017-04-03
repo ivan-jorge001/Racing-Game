@@ -1,5 +1,5 @@
 
-var  meta = null,player1,meta1 =  null, vehicle, vehicle2,mesh,mesh1;
+var  meta = null,player1,meta1 =  null, vehicle, vehicle2,mesh,mesh1,ground_material;
                         
 
 var scene,camera;
@@ -219,7 +219,7 @@ if (meta1 === true) {
      loader = new THREE.TextureLoader();
 
         // Materials
-        var ground_material = Physijs.createMaterial(
+        ground_material = Physijs.createMaterial(
             new THREE.MeshLambertMaterial({
                 map: THREE.ImageUtils.loadTexture('Media/map_1.png')
             }),

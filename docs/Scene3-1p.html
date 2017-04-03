@@ -101,11 +101,20 @@ document.addEventListener('keydown',function(ev) {
                 createText("Player", 0x142268, -43, 2, -6);
 
 
+                //  ground = new THREE.Mesh(
+                //     new THREE.PlaneGeometry(200, 150, 100, 100),
+                //     new THREE.MeshLambertMaterial({
+                //         map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
+                //     }),
+                //     0
+                // );
+
+                 var material = new THREE.MeshLambertMaterial({
+                    map: THREE.ImageUtils.loadTexture('Media/Map_1.png')
+                });
                  ground = new THREE.Mesh(
                     new THREE.PlaneGeometry(200, 150, 100, 100),
-                    new THREE.MeshLambertMaterial({
-                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
-                    }),
+                    material,
                     0
                 );
                 ground.rotation.x = -Math.PI / 2;

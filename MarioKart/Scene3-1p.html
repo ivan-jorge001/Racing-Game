@@ -10,7 +10,7 @@
     <script src="libaries/helvetiker_regular.typeface.js"></script>
 
     <script type="text/javascript" src="libaries/physi.js"></script>
-   
+
 
 
 
@@ -20,7 +20,7 @@
 
     <div id="starthere"></div>
     <script type="text/javascript">
-        var scene,ground;
+        var scene, ground;
         var game = (function() {
 
 
@@ -34,19 +34,19 @@
 
 
 
-document.addEventListener('keydown',function(ev) {
+            document.addEventListener('keydown', function(ev) {
 
-                   if (ev.keyCode === 66){
+                if (ev.keyCode === 66) {
                     window.location.href = "Scene2.html";
-                    }else{
+                } else {
 
-                         return;   
+                    return;
 
-                    };
+                };
 
-                
 
-                })
+
+            })
 
 
             var input;
@@ -101,7 +101,7 @@ document.addEventListener('keydown',function(ev) {
                 createText("Player", 0x142268, -43, 2, -6);
 
 
-                 ground = new THREE.Mesh(
+                ground = new THREE.Mesh(
                     new THREE.PlaneGeometry(200, 150, 100, 100),
                     new THREE.MeshLambertMaterial({
                         map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
@@ -202,7 +202,7 @@ document.addEventListener('keydown',function(ev) {
 
 
 
-                                camera = new THREE.PerspectiveCamera(
+                camera = new THREE.PerspectiveCamera(
                     35,
                     window.innerWidth / window.innerHeight,
                     1,
@@ -231,207 +231,209 @@ document.addEventListener('keydown',function(ev) {
 
 
                 //==========================================================
-function removecar (vehicle) {
-    scene.remove(vehicle)
- scene.simulate();
+                function removecar(vehicle) {
+                    scene.remove(vehicle)
+                    scene.simulate();
 
 
-}
-//========================================================================
-document.addEventListener('keydown',selectPlayer);
+                }
+                //========================================================================
+                document.addEventListener('keydown', selectPlayer);
 
 
-var counter1=0,counter=0,firstplayer;
+                var counter1 = 0,
+                    counter = 0,
+                    firstplayer;
 
-function selectPlayer (e) {
-console.log(e.keyCode)
+                function selectPlayer(e) {
+                    console.log(e.keyCode)
 
 
-switch (e.keyCode) {
+                    switch (e.keyCode) {
                         case 37: // left
-                        counter ++
-                        if (counter > 1) {
-                            removecar(vehicle)
-                        };
-                        if ((ground1.position.y === -6)&&(ground4.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground4.position.y = 40;
-                            ground3.position.y = -6;
-                            ground1.position.y = -6;
-                            firstplayer = "js/models/mustang-white.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === -6)&&(ground4.position.y === 40)&&(ground3.position.y === -6)) {
-                            ground4.position.y = -6;
-                            ground3.position.y = 40;
-                            ground1.position.y = -6;
-                            firstplayer = "js/models/mustang-blue.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === -6)&&(ground4.position.y === -6)&&(ground3.position.y === 40)) {
-                            ground4.position.y = -6;
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                            firstplayer = "js/models/mustang.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === 40)&&(ground4.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground4.position.y = 40;
-                            ground3.position.y = -6;
-                            ground1.position.y = -6;
-                            firstplayer = "js/models/mustang-white.js"
-                            car(firstplayer)
-                            scene.simulate();
-                            
-                        }
+                            counter++
+                            if (counter > 1) {
+                                removecar(vehicle)
+                            };
+                            if ((ground1.position.y === -6) && (ground4.position.y === -6) && (ground3.position.y === -6)) {
+                                ground4.position.y = 40;
+                                ground3.position.y = -6;
+                                ground1.position.y = -6;
+                                firstplayer = "js/models/mustang-white.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === -6) && (ground4.position.y === 40) && (ground3.position.y === -6)) {
+                                ground4.position.y = -6;
+                                ground3.position.y = 40;
+                                ground1.position.y = -6;
+                                firstplayer = "js/models/mustang-blue.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === -6) && (ground4.position.y === -6) && (ground3.position.y === 40)) {
+                                ground4.position.y = -6;
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+                                firstplayer = "js/models/mustang.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === 40) && (ground4.position.y === -6) && (ground3.position.y === -6)) {
+                                ground4.position.y = 40;
+                                ground3.position.y = -6;
+                                ground1.position.y = -6;
+                                firstplayer = "js/models/mustang-white.js"
+                                car(firstplayer)
+                                scene.simulate();
 
-                        break;
-                        case 39://right
-                        counter ++
-                        if (counter > 1) {
-                            removecar(vehicle)
-                        };
-                        if ((ground1.position.y === -6)&&(ground4.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground4.position.y = -6;
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                            firstplayer = "js/models/mustang.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === 40)&&(ground4.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground4.position.y = -6;
-                            ground3.position.y = 40;
-                            ground1.position.y = -6;
-                            firstplayer = "js/models/mustang-blue.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === -6)&&(ground4.position.y === -6)&&(ground3.position.y === 40)) {
-                            ground4.position.y = 40;
-                            ground3.position.y = -6;
-                            ground1.position.y = -6;
-                            firstplayer = "js/models/mustang-white.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        }else if ((ground1.position.y === -6)&&(ground4.position.y === 40)&&(ground3.position.y === -6)) {
-                            ground4.position.y = -6;
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                            firstplayer = "js/models/mustang.js"
-                            car(firstplayer)
-                            scene.simulate();
-                        };
-                        break;
-                        case 40://down
+                            }
 
-                        if (ground1.position.y === 40) {
-                            var car1_player1 = "js/models/mustang.js";
-                            localStorage.setItem("car1_player1", car1_player1);
-                            console.log("i have his car")
+                            break;
+                        case 39: //right
+                            counter++
+                            if (counter > 1) {
+                                removecar(vehicle)
+                            };
+                            if ((ground1.position.y === -6) && (ground4.position.y === -6) && (ground3.position.y === -6)) {
+                                ground4.position.y = -6;
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+                                firstplayer = "js/models/mustang.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === 40) && (ground4.position.y === -6) && (ground3.position.y === -6)) {
+                                ground4.position.y = -6;
+                                ground3.position.y = 40;
+                                ground1.position.y = -6;
+                                firstplayer = "js/models/mustang-blue.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === -6) && (ground4.position.y === -6) && (ground3.position.y === 40)) {
+                                ground4.position.y = 40;
+                                ground3.position.y = -6;
+                                ground1.position.y = -6;
+                                firstplayer = "js/models/mustang-white.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            } else if ((ground1.position.y === -6) && (ground4.position.y === 40) && (ground3.position.y === -6)) {
+                                ground4.position.y = -6;
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+                                firstplayer = "js/models/mustang.js"
+                                car(firstplayer)
+                                scene.simulate();
+                            };
+                            break;
+                        case 40: //down
 
-                        }else if (ground3.position.y === 40) {
-                            var car1_player1 = "js/models/mustang-blue.js";
-                            localStorage.setItem("car1_player1", car1_player1);
-                            console.log("i have his car");
-                        } else if (ground4.position.y === 40) {
-                            var car1_player1 = "js/models/mustang-white.js";
-                            localStorage.setItem("car1_player1", car1_player1);
-                            console.log("i have his car");
-                        };
-                        break;
-                    case 13:
-                    window.location.href = "Scene4.html"
-                    break;
-                        
+                            if (ground1.position.y === 40) {
+                                var car1_player1 = "js/models/mustang.js";
+                                localStorage.setItem("car1_player1", car1_player1);
+                                console.log("i have his car")
+
+                            } else if (ground3.position.y === 40) {
+                                var car1_player1 = "js/models/mustang-blue.js";
+                                localStorage.setItem("car1_player1", car1_player1);
+                                console.log("i have his car");
+                            } else if (ground4.position.y === 40) {
+                                var car1_player1 = "js/models/mustang-white.js";
+                                localStorage.setItem("car1_player1", car1_player1);
+                                console.log("i have his car");
+                            };
+                            break;
+                        case 13:
+                            window.location.href = "Scene4.html"
+                            break;
+
                     }
 
 
 
-            }
+                }
 
 
                 //============
-               
+
                 function car(player) {
-        scene.setGravity(new THREE.Vector3(0, 0, 20));
+                    scene.setGravity(new THREE.Vector3(0, 0, 20));
 
-                scene.addEventListener(
-                    'update',
-                    function() {
+                    scene.addEventListener(
+                        'update',
+                        function() {
 
-                        if (input && vehicle) {
-                            if (input.direction !== null) {
-                                input.steering += input.direction / 50;
-                                if (input.steering < -0.6) input.steering = -0.6;
-                                if (input.steering > 0.6) input.steering = 0.6;
-                            }
-                            vehicle.setSteering(input.steering, 0);
-                            vehicle.setSteering(input.steering, 1);
-
-                            if (input.power === true) {
-                                vehicle.applyEngineForce(200);
-
-                            } else if (input.power === false) {
-                                count++;
-                                if (count < 10) {
-                                    vehicle.setBrake(20, 2);
-                                    vehicle.setBrake(20, 3);
-                                } else {
-                                    vehicle.applyEngineForce(-150);
-
+                            if (input && vehicle) {
+                                if (input.direction !== null) {
+                                    input.steering += input.direction / 50;
+                                    if (input.steering < -0.6) input.steering = -0.6;
+                                    if (input.steering > 0.6) input.steering = 0.6;
                                 }
-                            } else {
-                                vehicle.applyEngineForce(0);
+                                vehicle.setSteering(input.steering, 0);
+                                vehicle.setSteering(input.steering, 1);
+
+                                if (input.power === true) {
+                                    vehicle.applyEngineForce(200);
+
+                                } else if (input.power === false) {
+                                    count++;
+                                    if (count < 10) {
+                                        vehicle.setBrake(20, 2);
+                                        vehicle.setBrake(20, 3);
+                                    } else {
+                                        vehicle.applyEngineForce(-150);
+
+                                    }
+                                } else {
+                                    vehicle.applyEngineForce(0);
+                                }
                             }
+
+                            scene.simulate(undefined, 2);
                         }
-
-                        scene.simulate(undefined, 2);
-                    }
-                );
+                    );
 
 
 
-                var json_loader = new THREE.JSONLoader();
-                json_loader.load(player, function(car, car_materials) {
-                    json_loader.load("js/models/mustang_wheel.js", function(wheel, wheel_materials) {
-                        var mesh = new Physijs.BoxMesh(
-                            car,
-                            new THREE.MeshFaceMaterial(car_materials)
-                        );
-                        mesh.position.set(0, 30, 35)
-                        mesh.rotation.set(-1.6, 1, 0)
-                        mesh.scale.set(7, 7, 7)
-
-                        vehicle = new Physijs.Vehicle(mesh, new Physijs.VehicleTuning(
-                            100.88,
-                            10.83,
-                            10.88,
-                            5000,
-                            100.5,
-                            100000
-                        ));
-
-                        scene.add(vehicle);
-                        var wheel_material = new THREE.MeshFaceMaterial(wheel_materials);
-
-                        for (var i = 0; i < 4; i++) {
-                            vehicle.addWheel(
-                                wheel,
-                                wheel_material,
-                                new THREE.Vector3(
-                                    i % 2 === 0 ? -14.6 : 14.6, -1,
-                                    i < 2 ? 24.3 : -22.2
-                                ),
-                                new THREE.Vector3(0, -7, 0),
-                                new THREE.Vector3(-7, -3, 0),
-                                1,
-                                0.7,
-                                i < 2 ? false : true
+                    var json_loader = new THREE.JSONLoader();
+                    json_loader.load(player, function(car, car_materials) {
+                        json_loader.load("js/models/mustang_wheel.js", function(wheel, wheel_materials) {
+                            var mesh = new Physijs.BoxMesh(
+                                car,
+                                new THREE.MeshFaceMaterial(car_materials)
                             );
-                        }
+                            mesh.position.set(0, 30, 35)
+                            mesh.rotation.set(-1.6, 1, 0)
+                            mesh.scale.set(7, 7, 7)
+
+                            vehicle = new Physijs.Vehicle(mesh, new Physijs.VehicleTuning(
+                                100.88,
+                                10.83,
+                                10.88,
+                                5000,
+                                100.5,
+                                100000
+                            ));
+
+                            scene.add(vehicle);
+                            var wheel_material = new THREE.MeshFaceMaterial(wheel_materials);
+
+                            for (var i = 0; i < 4; i++) {
+                                vehicle.addWheel(
+                                    wheel,
+                                    wheel_material,
+                                    new THREE.Vector3(
+                                        i % 2 === 0 ? -14.6 : 14.6, -1,
+                                        i < 2 ? 24.3 : -22.2
+                                    ),
+                                    new THREE.Vector3(0, -7, 0),
+                                    new THREE.Vector3(-7, -3, 0),
+                                    1,
+                                    0.7,
+                                    i < 2 ? false : true
+                                );
+                            }
 
 
+                        });
                     });
-                });
-}
+                }
 
                 requestAnimationFrame(render);
                 scene.simulate();
@@ -440,15 +442,15 @@ switch (e.keyCode) {
             render = function() {
 
                 requestAnimationFrame(render);
-               
 
 
-                    camera.position.copy(ground.position).add(new THREE.Vector3(0, 250, -10));
 
-                    // camera.lookAt(ground1.position);
+                camera.position.copy(ground.position).add(new THREE.Vector3(0, 250, -10));
 
-                    camera.rotation.set(-1.61, 0, 0)
-                
+                // camera.lookAt(ground1.position);
+
+                camera.rotation.set(-1.61, 0, 0)
+
                 renderer.render(scene, camera);
 
             };

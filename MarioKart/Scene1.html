@@ -43,7 +43,7 @@
                     antialias: true
                 }),
                 render_stats, physics_stats, scene = new Physijs.Scene(),
-                ground, light,light1, camera,
+                ground, light, light1, camera,
                 vehicle_body, vehicle, loader;
 
             document.addEventListener('keydown', function() {
@@ -140,12 +140,12 @@
 
                 light = new THREE.DirectionalLight(0xFFFFFF);
                 light.position.set(20, 20, -15);
-               
+
                 scene.add(light);
 
-light1 = new THREE.DirectionalLight(0xFFFFFF);
+                light1 = new THREE.DirectionalLight(0xFFFFFF);
                 light1.position.set(20, 20, -15);
-               
+
                 ground.add(light1);
 
 

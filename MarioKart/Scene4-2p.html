@@ -21,9 +21,9 @@
 
     <div id="3scene"></div>
     <script type="text/javascript">
-        var scene,road;
+        var scene, road;
         var car1_player1 = localStorage.getItem("car1_player1");
-    console.log(car1_player1)
+        console.log(car1_player1)
         var game = (function() {
 
 
@@ -42,19 +42,19 @@
                 vehicle_body, vehicle, loader;
 
 
-document.addEventListener('keydown',function(ev) {
+            document.addEventListener('keydown', function(ev) {
 
-                   if (ev.keyCode === 66){
+                if (ev.keyCode === 66) {
                     window.location.href = "Scene3-2p.html";
-                    }else{
+                } else {
 
-                         return;   
+                    return;
 
-                    };
+                };
 
-                
 
-                })
+
+            })
             initScene = function() {
 
 
@@ -159,9 +159,9 @@ document.addEventListener('keydown',function(ev) {
 
                 scene.add(ground1)
 
-var light1 = new THREE.DirectionalLight(0x000fff);
+                var light1 = new THREE.DirectionalLight(0x000fff);
                 light1.position.set(20, 20, -15);
-                 scene.add(light1);
+                scene.add(light1);
 
                 //=================================================
 
@@ -184,13 +184,12 @@ var light1 = new THREE.DirectionalLight(0x000fff);
                 ground3.position.x = 33;
 
                 scene.add(ground3)
-var light2 = new THREE.DirectionalLight(0xfff000);
+                var light2 = new THREE.DirectionalLight(0xfff000);
                 light2.position.set(20, 20, -15);
-                 scene.add(light2);
+                scene.add(light2);
 
                 requestAnimationFrame(render);
                 scene.simulate();
-            
 
 
 
@@ -200,62 +199,59 @@ var light2 = new THREE.DirectionalLight(0xfff000);
 
 
 
+                document.addEventListener('keydown', selectPlayer);
 
 
-
-document.addEventListener('keydown',selectPlayer);
-
-
-function selectPlayer (e) {
-console.log(e.keyCode)
+                function selectPlayer(e) {
+                    console.log(e.keyCode)
 
 
-switch (e.keyCode) {
+                    switch (e.keyCode) {
                         case 37: // left
-                    
-                        if ((ground1.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground3.position.y = 40;
-                            ground1.position.y = -6;
-                            
-                        }else if ((ground1.position.y === -6)&&(ground3.position.y === 40)) {
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                            
-                        }else if ((ground1.position.y === 40)&&(ground3.position.y === -6)) {
-                            ground3.position.y = 40;
-                            ground1.position.y = -6;
-                        }
 
-                        break;
-                        case 39://right
-                        if ((ground1.position.y === -6)&&(ground3.position.y === -6)) {
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                            
-                        }else if ((ground3.position.y === -6)&&(ground1.position.y === 40)) {
-                            ground3.position.y = 40;
-                            ground1.position.y = -6;
-                            
-                        }else if ((ground3.position.y === 40)&&(ground1.position.y === -6)) {
-                            ground3.position.y = -6;
-                            ground1.position.y = 40;
-                        }
-                        break;
-                        case 13://down
+                            if ((ground1.position.y === -6) && (ground3.position.y === -6)) {
+                                ground3.position.y = 40;
+                                ground1.position.y = -6;
 
-                        if (ground1.position.y === 40) {
-                            alert("out of order")
-                        }else if (ground3.position.y === 40) {
-                            window.location.href = "index2p.html"
-                        }
-                        break;
-                    
-                        
+                            } else if ((ground1.position.y === -6) && (ground3.position.y === 40)) {
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+
+                            } else if ((ground1.position.y === 40) && (ground3.position.y === -6)) {
+                                ground3.position.y = 40;
+                                ground1.position.y = -6;
+                            }
+
+                            break;
+                        case 39: //right
+                            if ((ground1.position.y === -6) && (ground3.position.y === -6)) {
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+
+                            } else if ((ground3.position.y === -6) && (ground1.position.y === 40)) {
+                                ground3.position.y = 40;
+                                ground1.position.y = -6;
+
+                            } else if ((ground3.position.y === 40) && (ground1.position.y === -6)) {
+                                ground3.position.y = -6;
+                                ground1.position.y = 40;
+                            }
+                            break;
+                        case 13: //down
+
+                            if (ground1.position.y === 40) {
+                                window.location.href = "index2m2p.html"
+                            } else if (ground3.position.y === 40) {
+                                window.location.href = "index2p.html"
+                            }
+                            break;
+
+
                     }
 
 
 
-            }
+                }
 
             };
 
@@ -265,11 +261,11 @@ switch (e.keyCode) {
 
 
 
-                 camera.position.copy(road.position).add(new THREE.Vector3(0, 250, 0));
+                camera.position.copy(road.position).add(new THREE.Vector3(0, 250, 0));
 
-                    // camera.lookAt(ground1.position);
+                // camera.lookAt(ground1.position);
 
-                    camera.rotation.set(-1.58, 0, 0)
+                camera.rotation.set(-1.58, 0, 0)
 
                 renderer.render(scene, camera);
 

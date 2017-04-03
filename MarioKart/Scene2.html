@@ -21,17 +21,17 @@
 
     <div id="3scene"></div>
     <script type="text/javascript">
-    var count = 0;
+        var count = 0;
 
 
-    // window.onbeforeunload = function() {window.location("Scene1.html")};
+        // window.onbeforeunload = function() {window.location("Scene1.html")};
 
 
         var scene;
         var objects = [];
-var onep,twop,back;
-       var projector = new THREE.Projector();
-    var mouseVector = new THREE.Vector3();
+        var onep, twop, back;
+        var projector = new THREE.Projector();
+        var mouseVector = new THREE.Vector3();
         var game = (function() {
 
 
@@ -73,13 +73,13 @@ var onep,twop,back;
 
 
 
-                 var material =   new THREE.MeshLambertMaterial({
-                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
-                    });
+                var material = new THREE.MeshLambertMaterial({
+                    map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
+                });
 
 
                 var road = new THREE.Mesh(
-                    new THREE.PlaneGeometry(200, 150, 100, 100),material,
+                    new THREE.PlaneGeometry(200, 150, 100, 100), material,
                     0
                 );
                 road.rotation.x = -Math.PI / 2;
@@ -141,7 +141,7 @@ var onep,twop,back;
                 var twopMate = new THREE.MeshPhongMaterial({
                     color: 0x142268
                 });
-                 twop = new THREE.Mesh(twopGeo, twopMate);
+                twop = new THREE.Mesh(twopGeo, twopMate);
 
 
                 twop.receiveShadow = true;
@@ -237,11 +237,11 @@ var onep,twop,back;
                 );
 
 
-    
+
 
                 //============================================================
 
-                
+
 
 
 
@@ -274,58 +274,58 @@ var onep,twop,back;
                 renderer.render(scene, camera);
             };
 
-            function gamemode( e ) {
-               console.log(e.keyCode)
+            function gamemode(e) {
+                console.log(e.keyCode)
                 switch (e.keyCode) {
-                        case 66: // left
-                            window.location.href = "Scene1.html";
-                            count = 0
-                            break;
+                    case 66: // left
+                        window.location.href = "Scene1.html";
+                        count = 0
+                        break;
 
-                        case 38:
-                        if ((onep.position.y=== -6)) {
-                             onep.position.y =50;
-                        twop.position.y =-6;                             
-                         }else if ((onep.position.y === 50)) {
+                    case 38:
+                        if ((onep.position.y === -6)) {
+                            onep.position.y = 50;
+                            twop.position.y = -6;
+                        } else if ((onep.position.y === 50)) {
                             onep.position.y = -6;
-                            twop.position.y =50;
-                         };                       
-                            break;
-                        case 40: 
-                        if ((twop.position.y=== -6)) {
+                            twop.position.y = 50;
+                        };
+                        break;
+                    case 40:
+                        if ((twop.position.y === -6)) {
                             onep.position.y = -6;
-                            twop.position.y =50;
-                             
-                         }else if ((twop.position.y === 50)) {
-                            onep.position.y =50;
-                             twop.position.y =-6;
-                         };
-                            break;
-                            case 13:
+                            twop.position.y = 50;
 
-                            if ((twop.position.y === 50)&&(onep.position.y=== -6)) {
-                                console.log("2 player works")
+                        } else if ((twop.position.y === 50)) {
+                            onep.position.y = 50;
+                            twop.position.y = -6;
+                        };
+                        break;
+                    case 13:
+
+                        if ((twop.position.y === 50) && (onep.position.y === -6)) {
+                            console.log("2 player works")
                             window.location.href = "Scene3-2p.html";
-                         }else if ((twop.position.y === -6)&&(onep.position.y=== 50)) {
+                        } else if ((twop.position.y === -6) && (onep.position.y === 50)) {
                             console.log("1 player works")
                             window.location.href = "Scene3-1p.html";
                             // window.location.href = "Scene3-2p.html";
-                         };
+                        };
 
 
-                            break;
-                    }
+                        break;
+                }
 
-        
 
-            
-      
-    }
+
+
+
+            }
 
 
 
             window.onload = initScene;
-window.addEventListener( 'keydown', gamemode, false );
+            window.addEventListener('keydown', gamemode, false);
             return {
                 scene: scene,
                 camera: camera,

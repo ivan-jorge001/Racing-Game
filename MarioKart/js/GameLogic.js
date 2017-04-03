@@ -17,7 +17,7 @@ var game = (function() {
 
     var position, x, z;
     var car1_player1 = localStorage.getItem("car1_player1");
-    console.log(car1_player1)
+    console.log(car1_player1);
 
     var directionX, directionZ;
     var count = 0;
@@ -53,7 +53,7 @@ var game = (function() {
         physics_stats.domElement.style.zIndex = 100;
         document.getElementById('viewport').appendChild(physics_stats.domElement);
         //-------------------------------------------------------------------
-camera = new THREE.PerspectiveCamera(
+        camera = new THREE.PerspectiveCamera(
             35,
             window.innerWidth / window.innerHeight,
             1,
@@ -275,7 +275,7 @@ camera = new THREE.PerspectiveCamera(
                     mesh.position.z = 33.07;
                     mesh.rotation.y = -Math.PI;
                     mesh.castShadow = mesh.receiveShadow = true;
-                    mesh.addEventListener('collision', function() { console.log("ivan")})
+
 
 
                     vehicle2 = new Physijs.Vehicle(mesh, new Physijs.VehicleTuning(
@@ -326,7 +326,7 @@ camera = new THREE.PerspectiveCamera(
 
                     function right() {
                         input2.direction = -1;
-                    };
+                    }
 
                     function forwardnull() {
                         input2.power = null;
@@ -344,7 +344,7 @@ camera = new THREE.PerspectiveCamera(
                     function rightnull() {
                         input2.direction = null;
                         input2.steering = 0;
-                    };
+                    }
 
 
                     var setTimer0 = setInterval(function() {

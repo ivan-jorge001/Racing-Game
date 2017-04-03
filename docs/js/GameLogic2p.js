@@ -221,7 +221,7 @@ if (meta1 === true) {
         // Materials
         var ground_material = Physijs.createMaterial(
             new THREE.MeshLambertMaterial({
-                map: loader.load('Media/map_1.png')
+                map: THREE.ImageUtils.loadTexture('Media/map_1.png')
             }),
             5, // high friction
             0.4 // low restitution

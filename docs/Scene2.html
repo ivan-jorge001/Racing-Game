@@ -70,14 +70,13 @@ var onep,twop,back;
 
 
 
-
+                var material =   new THREE.MeshLambertMaterial({
+                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
+                    });
 
 
                 var road = new THREE.Mesh(
-                    new THREE.PlaneGeometry(200, 150, 100, 100),
-                    new THREE.MeshLambertMaterial({
-                        map: THREE.ImageUtils.loadTexture('Media/Scene2.jpg')
-                    }),
+                    new THREE.PlaneGeometry(200, 150, 100, 100),material,
                     0
                 );
                 road.rotation.x = -Math.PI / 2;

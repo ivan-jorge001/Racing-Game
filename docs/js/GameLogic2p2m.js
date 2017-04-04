@@ -285,7 +285,7 @@ var game2p = (function() {
                 new THREE.MeshPhongMaterial({
                     color: 0xffffff,
                     transparent: true,
-                    opacity: 0.9
+                    opacity: 0
                 }), 0
             );
 

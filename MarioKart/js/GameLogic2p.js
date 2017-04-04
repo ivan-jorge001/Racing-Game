@@ -217,7 +217,7 @@ var game2p = (function() {
         // Materials
         var ground_material = Physijs.createMaterial(
             new THREE.MeshLambertMaterial({
-                map: loader.load('media/map_1.png')
+                map: loader.load('Media/map_1.png')
             }),
             5, // high friction
             0.4 // low restitution

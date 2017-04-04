@@ -15,12 +15,12 @@ var game = (function() {
 
 
 
-    var position, x, z;
+    var position, x, z,meta;
     var car1_player1 = localStorage.getItem("car1_player1");
     console.log(car1_player1);
 
     var directionX, directionZ;
-    var count = 0;
+    var count =0;
     var counterForRotation = 1;
     var input;
     var initScene, render,
@@ -45,13 +45,13 @@ var game = (function() {
         render_stats.domElement.style.position = 'absolute';
         render_stats.domElement.style.top = '1px';
         render_stats.domElement.style.zIndex = 100;
-        document.getElementById('viewport').appendChild(render_stats.domElement);
+        // document.getElementById('viewport').appendChild(render_stats.domElement);
         //--------------------------------------------------------------
         physics_stats = new Stats();
         physics_stats.domElement.style.position = 'absolute';
         physics_stats.domElement.style.top = '50px';
         physics_stats.domElement.style.zIndex = 100;
-        document.getElementById('viewport').appendChild(physics_stats.domElement);
+        // document.getElementById('viewport').appendChild(physics_stats.domElement);
         //-------------------------------------------------------------------
         camera = new THREE.PerspectiveCamera(
             35,
@@ -96,17 +96,11 @@ var game = (function() {
                     vehicle.setSteering(input.steering, 1);
 
                     if (input.power === true) {
-                        vehicle.applyEngineForce(200);
+                        vehicle.applyEngineForce(800);
 
                     } else if (input.power === false) {
-                        count++;
-                        if (count < 10) {
-                            vehicle.setBrake(20, 2);
-                            vehicle.setBrake(20, 3);
-                        } else {
-                            vehicle.applyEngineForce(-150);
-
-                        }
+                                                    
+                            vehicle.applyEngineForce(-650);
                     } else {
                         vehicle.applyEngineForce(0);
                     }
@@ -213,7 +207,7 @@ var game = (function() {
                         case 40: // back
                             console.log("keyup back");
                             input.power = null;
-                            count = 0;
+                            
                             break;
                     }
                 });
@@ -246,13 +240,10 @@ var game = (function() {
 
                         } else if (input2.power === false) {
                             count++;
-                            if (count < 10) {
-                                vehicle2.setBrake(20, 2);
-                                vehicle2.setBrake(20, 3);
-                            } else {
-                                vehicle2.applyEngineForce(-150);
+                            
+                                vehicle2.applyEngineForce(-650);
 
-                            }
+                            
                         } else {
                             vehicle2.applyEngineForce(0);
                         }
@@ -537,7 +528,7 @@ var game = (function() {
 
 
 
-
+meta = true;
     render = function() {
 
         requestAnimationFrame(render);
@@ -545,6 +536,42 @@ var game = (function() {
             camera.position.copy(vehicle.mesh.position).add(cameraPosition(vehicle.mesh.rotation));
 
             camera.lookAt(vehicle.mesh.position);
+
+            var finishline = vehicle.mesh.position.z;
+
+
+
+                    if ((0 < directionX && directionX < 1 && 0 > directionZ && directionZ > -1 || 0 > directionX && directionX > -1 && 0 > directionZ && directionZ > -1) && (finishline > 13 && finishline < 16) && (input.power === true || input.power === null)) {
+console.log(meta)
+                        if (meta === true) {
+                            count++;
+                            console.log(count)
+                            document.getElementById('player1').innerHTML = count + "/2";
+
+                            if ((count === 2)){
+
+                                document.getElementById('winner').style.display = "block";
+                                document.getElementById('winners').innerHTML = "Player 1 has won";
+                            }
+
+
+
+
+                        }
+                        meta = false;
+                        var inteval = setInterval(function metas() {
+                            console.log("ivantimer2sssssssssssssssssssss1")
+                            meta = true;
+                            clearInterval(inteval);
+                        }, 3000);
+                    }
+                
+
+
+
+
+
+
 
         }
         renderer.render(scene, camera);

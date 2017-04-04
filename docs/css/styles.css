@@ -18,7 +18,7 @@ body {
     font-family: sans-serif;
     left: 25%;
     margin: 0px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .Scene2 {
@@ -61,11 +61,11 @@ position: absolute;
 color: black;
 left: 0px;
 margin-left: 20px;
-font-size: 40px;
+font-size: 30px;
 
 }
 #player2{
-font-size: 40px;
+font-size: 30px;
 
 position: absolute;
 color:white;
@@ -75,7 +75,7 @@ margin-right: 20px;
 
 }
 #winner{
-    font-size: 40px;
+    font-size: 30px;
     display: none;
     position:absolute;
     width: 100%;

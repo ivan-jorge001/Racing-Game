@@ -29,7 +29,6 @@ var game2p = (function() {
         }
     });
 
-    var audio = document.getElementById("myAudio");
 
     
     var view, renderer, initScene, loader;
@@ -64,44 +63,7 @@ var game2p = (function() {
             up: [0, 1, 0],
             fov: 35,
             updateCamera: function(camera, scene, mouseX, mouseY) {
-audio.play();
-console.log(audio);
-                if (vehicle) {
-                    var finishline = vehicle.mesh.position.z;
 
-
-
-
-
-
-                    camera.position.copy(vehicle.mesh.position).add(cameraPosition(vehicle.mesh.rotation, mesh, vehicle));
-                    // cameraPosition(vehicle.mesh.rotation)
-                    camera.lookAt(vehicle.mesh.position);
-
-
-                    if ((0 < directionX && directionX < 1 && 0 > directionZ && directionZ > -1 || 0 > directionX && directionX > -1 && 0 > directionZ && directionZ > -1) && (finishline > 13 && finishline < 16) && (input.power === true || input.power === null)) {
-
-                        if (meta === true) {
-                            count++;
-                            document.getElementById('player1').innerHTML = count + "/2";
-
-                            if ((count === 2) && (document.getElementById('winner').offsetHeight === 0)) {
-
-                                document.getElementById('winner').style.display = "block";
-                                document.getElementById('winners').innerHTML = "Player 1 has won";
-                            }
-
-
-
-
-                        }
-                        meta = false;
-                        var inteval = setInterval(function metas() {
-                            meta = true;
-                            clearInterval(inteval);
-                        }, 1000);
-                    }
-                }
             }
         },
         {

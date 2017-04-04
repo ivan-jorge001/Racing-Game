@@ -29,7 +29,9 @@ var game2p = (function() {
         }
     });
 
+    var audio = document.getElementById("myAudio");
 
+    
     var view, renderer, initScene, loader;
     var vehicle_body1, input2;
 
@@ -62,7 +64,8 @@ var game2p = (function() {
             up: [0, 1, 0],
             fov: 35,
             updateCamera: function(camera, scene, mouseX, mouseY) {
-
+audio.play();
+console.log(audio);
                 if (vehicle) {
                     var finishline = vehicle.mesh.position.z;
 

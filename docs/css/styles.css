@@ -29,12 +29,12 @@ width: 230px;
     font-family: sans-serif;
     left: 25%;
     margin: 0px;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .Scene2 {
     position: absolute;
-    font-size: 40px;
+    font-size: 50px;
     color: white;
     top: 50px;
     font-family: sans-serif;
@@ -72,11 +72,11 @@ position: absolute;
 color: black;
 left: 0px;
 margin-left: 20px;
-font-size: 40px;
+font-size: 50px;
 
 }
 #player2{
-font-size: 40px;
+font-size: 50px;
 
 position: absolute;
 color:white;
@@ -86,7 +86,7 @@ margin-right: 20px;
 
 }
 #winner{
-    font-size: 40px;
+    font-size: 50px;
     display: none;
     position:absolute;
     width: 100%;

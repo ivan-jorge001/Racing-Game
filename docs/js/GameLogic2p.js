@@ -96,7 +96,7 @@ var game2p = (function() {
                         var inteval = setInterval(function metas() {
                             meta = true;
                             clearInterval(inteval);
-                        }, 1000);
+                        }, 6000);
                     }
                 }
             }
@@ -137,7 +137,7 @@ var game2p = (function() {
                         var inteval = setInterval(function metas() {
                             meta1 = true;
                             clearInterval(inteval);
-                        }, 1000);
+                        }, 6000);
                     }
                 }
             }

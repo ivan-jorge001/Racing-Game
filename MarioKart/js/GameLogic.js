@@ -563,7 +563,7 @@ console.log(meta)
                             console.log("ivantimer2sssssssssssssssssssss1")
                             meta = true;
                             clearInterval(inteval);
-                        }, 3000);
+                        }, 6000);
                     }
                 
 

@@ -562,7 +562,7 @@ console.log(meta)
                         var inteval = setInterval(function metas() {
                             meta = true;
                             clearInterval(inteval);
-                        }, 3000);
+                        }, 6000);
                     }
                 
 

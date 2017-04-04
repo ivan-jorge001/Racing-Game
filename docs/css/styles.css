@@ -10,6 +10,17 @@ body {
     font-size: 10pt;
     overflow: hidden;
 }
+button{
+    border-radius: 30px;
+    border: none;
+    background-color: rgba(255,30,30,0.4);
+    
+    font-size: 30px;
+height: 100px;
+width: 230px;
+
+
+}
 
 .Scene1 {
     position: absolute;
@@ -61,11 +72,11 @@ position: absolute;
 color: black;
 left: 0px;
 margin-left: 20px;
-font-size: 30px;
+font-size: 40px;
 
 }
 #player2{
-font-size: 30px;
+font-size: 40px;
 
 position: absolute;
 color:white;
@@ -75,7 +86,7 @@ margin-right: 20px;
 
 }
 #winner{
-    font-size: 30px;
+    font-size: 40px;
     display: none;
     position:absolute;
     width: 100%;

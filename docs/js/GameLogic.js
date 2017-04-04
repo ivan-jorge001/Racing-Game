@@ -11,7 +11,16 @@ var game = (function() {
 
 
 
-
+var obj = document.createElement("audio");
+       obj.src="audio/carAcceleration.mp3";
+       obj.volume=0.50;
+       obj.autoPlay=false;
+       obj.preLoad=true;
+var slowing = document.createElement("audio");
+       slowing.src="audio/slowingdown.mp3";
+       slowing.volume=0.50;
+       slowing.autoPlay=false;
+       slowing.preLoad=true;
 
 
 
@@ -169,7 +178,9 @@ var game = (function() {
 
                         case 38: // forward
                             console.log("keydown forward");
-
+                            slowing.pause();
+                            obj.play();
+                            
                             input.power = true;
                             break;
 
@@ -195,6 +206,8 @@ var game = (function() {
 
                         case 38: // forward
                             console.log("keyup forward");
+                             slowing.play();
+                            obj.pause();
                             input.power = null;
                             break;
 

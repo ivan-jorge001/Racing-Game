@@ -3,6 +3,30 @@ var meta = null,
     vehicle, vehicle2, mesh, mesh1, ground_material;
 
 
+
+
+var obj = document.createElement("audio");
+       obj.src="audio/carAcceleration.mp3";
+       obj.volume=0.50;
+       obj.autoPlay=false;
+       obj.preLoad=true;
+var slowing = document.createElement("audio");
+       slowing.src="audio/slowingdown.mp3";
+       slowing.volume=0.50;
+       slowing.autoPlay=false;
+       slowing.preLoad=true;
+       var obj1 = document.createElement("audio");
+       obj1.src="audio/carAcceleration.mp3";
+       obj1.volume=0.50;
+       obj1.autoPlay=false;
+       obj1.preLoad=true;
+var slowing1 = document.createElement("audio");
+       slowing1.src="audio/slowingdown.mp3";
+       slowing1.volume=0.50;
+       slowing1.autoPlay=false;
+       slowing1.preLoad=true;
+
+
 var scene, camera;
 var game2p = (function() {
 
@@ -427,6 +451,8 @@ var game2p = (function() {
                     break;
 
                 case 38: // forward
+                slowing.pause();
+                obj.play();
 
                     input.power = true;
                     break;
@@ -456,6 +482,8 @@ var game2p = (function() {
                     break;
 
                 case 38: // forward
+                slowing.play();
+                obj.pause();
                     input.power = null;
                     break;
 
@@ -573,6 +601,8 @@ var game2p = (function() {
                     break;
 
                 case 87: // forward
+                slowing1.pause();
+                obj1.play();
 
                     input2.power = true;
                     break;
@@ -598,6 +628,8 @@ var game2p = (function() {
                     break;
 
                 case 87: // forward
+                slowing1.play();
+                obj1.pause();
                     input2.power = null;
                     break;
 

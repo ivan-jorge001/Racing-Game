@@ -21,6 +21,19 @@ width: 230px;
 
 
 }
+ .instruction{
+    color: white;
+    position: absolute;
+    height: 5%;
+    width: 3%;
+    top: 0px;
+    right: 0px;
+     margin-right: 5%;
+    margin-top: 5%;
+    }
+    .instruction:hover + .instruction{
+        display: block
+    }
 
 .Scene1 {
     position: absolute;
